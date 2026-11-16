@@ -1,0 +1,203 @@
+general:
+  # Commands to run when the WM has started.
+  startup_commands: ['shell-exec zebar']
+
+  # Commands to run just before the WM is shutdown.
+  shutdown_commands: ['shell-exec taskkill /IM zebar.exe /F']
+
+  # Commands to run after the WM config is reloaded.
+  config_reload_commands: []
+
+  # Whether to automatically focus windows underneath the cursor.
+  focus_follows_cursor: false
+
+  # Whether to switch back and forth between the previously focused
+  # workspace when focusing the current workspace.
+  toggle_workspace_on_refocus: false
+
+  cursor_jump:
+    # Whether to automatically move the cursor on the specified trigger.
+    enabled: true
+    trigger: 'monitor_focus'
+
+  # How windows should be hidden when switching workspaces.
+  hide_method: 'cloak'
+  show_all_in_taskbar: false
+
+gaps:
+  scale_with_dpi: true
+  inner_gap: '20px'
+  outer_gap:
+    top: '60px'
+    right: '20px'
+    bottom: '20px'
+    left: '20px'
+
+window_effects:
+  focused_window:
+    border:
+      enabled: false
+    hide_title_bar:
+      enabled: false
+    corner_style:
+      enabled: false
+    transparency:
+      enabled: false
+
+  other_windows:
+    border:
+      enabled: false
+    hide_title_bar:
+      enabled: false
+    corner_style:
+      enabled: false
+    transparency:
+      enabled: false
+
+window_behavior:
+  initial_state: 'tiling'
+  state_defaults:
+    floating:
+      centered: true
+      shown_on_top: false
+    fullscreen:
+      maximize: false
+      shown_on_top: false
+
+workspaces:
+  - name: '1'
+  - name: '2'
+  - name: '3'
+  - name: '4'
+  - name: '5'
+  - name: '6'
+  - name: '7'
+  - name: '8'
+  - name: '9'
+
+window_rules:
+  # Task Manager and background utilities require admin privileges
+  - commands: ['ignore']
+    match:
+      - window_process: { equals: 'Taskmgr' }
+      - window_process: { equals: 'Antigravity' }
+      - window_process: { equals: 'zebar' }
+      - window_process: { equals: 'Flow.Launcher' }
+      - window_process: { equals: 'Happ' }
+      - window_process: { equals: 'AG_2.31.2' }
+      - window_process: { equals: 'AG_2' }
+      - window_process: { equals: 'Hiddify' }
+      - window_process: { equals: 'Throne' }
+
+  # Dialogs/popups should be floating by default.
+  - commands: ['set-floating']
+    match:
+      - window_title: { regex: '[Pp]icture.in.[Pp]icture' }
+      - window_class: { regex: '(#32770|SunAwtDialog)' }
+
+binding_modes:
+  - name: 'resize'
+    keybindings:
+      - commands: ['resize --width -2%']
+        bindings: ['h', 'left']
+      - commands: ['resize --width +2%']
+        bindings: ['l', 'right']
+      - commands: ['resize --height +2%']
+        bindings: ['k', 'up']
+      - commands: ['resize --height -2%']
+        bindings: ['j', 'down']
+      - commands: ['wm-disable-binding-mode --name resize']
+        bindings: ['escape', 'enter']
+
+keybindings:
+  # Shift focus
+  - commands: ['focus --direction left']
+    bindings: ['alt+h', 'alt+left']
+  - commands: ['focus --direction right']
+    bindings: ['alt+l', 'alt+right']
+  - commands: ['focus --direction up']
+    bindings: ['alt+k', 'alt+up']
+  - commands: ['focus --direction down']
+    bindings: ['alt+j', 'alt+down']
+
+  # Move windows
+  - commands: ['move --direction left']
+    bindings: ['alt+shift+h', 'alt+shift+left']
+  - commands: ['move --direction right']
+    bindings: ['alt+shift+l', 'alt+shift+right']
+  - commands: ['move --direction up']
+    bindings: ['alt+shift+k', 'alt+shift+up']
+  - commands: ['move --direction down']
+    bindings: ['alt+shift+j', 'alt+shift+down']
+
+  # Toggle tiling direction
+  - commands: ['toggle-tiling-direction']
+    bindings: ['alt+v']
+
+  # Toggle floating
+  - commands: ['toggle-floating']
+    bindings: ['alt+w', 'alt+shift+space']
+
+  # Toggle fullscreen
+  - commands: ['toggle-fullscreen']
+    bindings: ['alt+f']
+
+  # Switch workspaces
+  - commands: ['focus --workspace 1']
+    bindings: ['alt+1']
+  - commands: ['focus --workspace 2']
+    bindings: ['alt+2']
+  - commands: ['focus --workspace 3']
+    bindings: ['alt+3']
+  - commands: ['focus --workspace 4']
+    bindings: ['alt+4']
+  - commands: ['focus --workspace 5']
+    bindings: ['alt+5']
+  - commands: ['focus --workspace 6']
+    bindings: ['alt+6']
+  - commands: ['focus --workspace 7']
+    bindings: ['alt+7']
+  - commands: ['focus --workspace 8']
+    bindings: ['alt+8']
+  - commands: ['focus --workspace 9']
+    bindings: ['alt+9']
+
+  # Move window to workspace
+  - commands: ['move --workspace 1', 'focus --workspace 1']
+    bindings: ['alt+shift+1']
+  - commands: ['move --workspace 2', 'focus --workspace 2']
+    bindings: ['alt+shift+2']
+  - commands: ['move --workspace 3', 'focus --workspace 3']
+    bindings: ['alt+shift+3']
+  - commands: ['move --workspace 4', 'focus --workspace 4']
+    bindings: ['alt+shift+4']
+  - commands: ['move --workspace 5', 'focus --workspace 5']
+    bindings: ['alt+shift+5']
+  - commands: ['move --workspace 6', 'focus --workspace 6']
+    bindings: ['alt+shift+6']
+  - commands: ['move --workspace 7', 'focus --workspace 7']
+    bindings: ['alt+shift+7']
+  - commands: ['move --workspace 8', 'focus --workspace 8']
+    bindings: ['alt+shift+8']
+  - commands: ['move --workspace 9', 'focus --workspace 9']
+    bindings: ['alt+shift+9']
+
+  # Close window
+  - commands: ['close']
+    bindings: ['alt+shift+q']
+
+  # Exit WM
+  - commands: ['wm-exit']
+    bindings: ['alt+shift+e']
+
+  # Reload config
+  - commands: ['wm-reload-config']
+    bindings: ['alt+shift+r']
+
+  # Launch Windows Terminal
+  - commands: ['shell-exec wt']
+    bindings: ['alt+enter']
+
+  # Launch Application Menu (Flow Launcher / rofi)
+  - commands: ['shell-exec %LOCALAPPDATA%\FlowLauncher\Flow.Launcher.exe']
+    bindings: ['alt+d', 'windows+d']

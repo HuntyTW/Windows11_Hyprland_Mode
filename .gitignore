@@ -1,0 +1,13 @@
+# Logs & Temp files
+*.log
+*.tmp
+*.bak
+
+# Windows Explorer & OS
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# IDE / Editors
+.vscode/
+.idea/
